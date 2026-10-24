@@ -19,14 +19,20 @@ char wall = '#';
 char flr = ' ';
 char pl = 'V';
 char en = 'X';
+char hh = '+';
 
 int maxEnemy = 5;
+int maxHeal = 3;
 
 int kills = 0;
 int lives = 100;
 int maxKills = 0;
 
 int attackH = 5;
+int inits = 20;
+
+int heal = 15;
+int maxLives = 150;
 
 int infoA = 5;
 
@@ -47,7 +53,7 @@ std::string room1[20] = {
         "#.....................#......#",
         "#...........#.........#......#",
         "#...........#.........#......#",
-        "#...........#.........#......#",
+        "E...........#.........#......#",
         "#...........#................#",
         "#...........#................#",
         "#...........#................#",
@@ -56,19 +62,21 @@ std::string room1[20] = {
         "#...................#........#",
         "#...................#........#",
         "#.......#######.....#........#",
-        "#...................#........#",
+        "#...................#........E",
         "#...................#........#",
         "#...................#........#",
         "##################E###########"
 };
-cord spawn1d = {12, 1};
-cord spawn1u = {18, 18};
+cord spawn1u = {12, 1};
+cord spawn1d = {18, 18};
+cord spawn1l = {1, 7};
+cord spawn1r = {28, 16};
 
 std::string room2[20] = {
         "##################E###########",
         "#............................#",
         "#.......#....................#",
-        "#.......#....................#",
+        "E.......#....................#",
         "#########............#########",
         "#.......#....................#",
         "#.......#....................#",
@@ -78,7 +86,7 @@ std::string room2[20] = {
         "#.......###############......#",
         "#.............#..............#",
         "#............................#",
-        "#............................#",
+        "#............................E",
         "#............................#",
         "#.............#..............#",
         "#.............################",
@@ -87,8 +95,10 @@ std::string room2[20] = {
         "##############E###############"
 };
 
-cord spawn2d = {18, 1};
-cord spawn2u = {14, 18};\
+cord spawn2u = {18, 1};
+cord spawn2d = {14, 18};
+cord spawn2l = {1, 3};
+cord spawn2r = {28, 13};
 
 std::string room3[20] = { 
     "##############E###############", 
@@ -96,24 +106,26 @@ std::string room3[20] = {
     "#....#########....########...#", 
     "#....#.......#....#......#...#", 
     "#....#.......#....#......#...#", 
-    "#....#.......#....#......#...#", 
+    "#....#...................#...#", 
     "#....#########....########...#", 
     "#............................#", 
     "######...############...######", 
-    "#............................#", 
-    "#............................#", 
+    "E............................#", 
+    "#............................E", 
     "######...############...######", 
     "#............................#", 
     "#....#########....########...#", 
-    "#....#.......#....#......#...#", 
+    "#....#...................#...#", 
     "#....#.......#....#......#...#", 
     "#....#.......#....#......#...#", 
     "#....#########....########...#", 
     "#............................#", 
     "##################E###########"
 };
-cord spawn3d = {14, 1};
-cord spawn3u = {18, 18};
+cord spawn3u = {14, 1};
+cord spawn3d = {18, 18};
+cord spawn3l = {1, 9};
+cord spawn3r = {28, 10};
 
 std::string room4[20] = { 
     "##########E###################", 
@@ -121,12 +133,12 @@ std::string room4[20] = {
     "#...####........####........##", 
     "#...####........####........##", 
     "#............................#", 
-    "#............................#", 
+    "E............................#", 
     "#........######........#######", 
     "#........######........#######", 
     "#............................#", 
     "#............................#", 
-    "#............................#", 
+    "#............................E", 
     "#............................#", 
     "#........######........#######", 
     "#........######........#######", 
@@ -137,8 +149,10 @@ std::string room4[20] = {
     "#............................#", 
     "#######################E######"
 };
-cord spawn4d = {10, 1};
-cord spawn4u = {23, 18};
+cord spawn4u = {10, 1};
+cord spawn4d = {23, 18};
+cord spawn4l = {1, 5};
+cord spawn4r = {28, 10};
 
 
 
@@ -171,7 +185,7 @@ void drawScreen(std::string room[20]){
 
     for(int i = 0; i < 20; i++){
 
-        for(int j = 0; j < 31; j++){
+        for(int j = 0; j < 30; j++){
             if (i == pY && j == pX) {
                 std::cout << pl;
             }
@@ -179,6 +193,7 @@ void drawScreen(std::string room[20]){
                 if(room[i][j] == '#') std::cout << wall;
                 if(room[i][j] == '.') std::cout << flr;
                 if(room[i][j] == 'X') std::cout << en;
+                if(room[i][j] == '+') std::cout << hh;
                 if(room[i][j] == 'E') std::cout << 'E';
             }
         }
@@ -211,6 +226,33 @@ void SpawnEnemy(){
             nowR[ry][rx] = 'X';
         }
     }
+
+    for(int i = 0; i < 20; i++){
+        for(int j = 0; j < 30; j++){
+            if(nowR[i][j] == '+'){
+                nowR[i][j] = '.';
+            }
+        }
+    }
+
+    for(int e = 0; e < maxHeal; e++) { 
+        int rx = rand() % 28 + 1;
+        int ry = rand() % 18 + 1; 
+        if(nowR[ry][rx] == '.') {
+            nowR[ry][rx] = '+';
+        }
+    }
+}
+
+void StatsSave(){
+    std::ofstream ostt("stats.txt");
+    
+    maxKills = std::max(maxKills, kills);
+    if(ostt.is_open()){
+        ostt << maxKills;
+        ostt.close();
+    }
+
 }
 
 
@@ -222,15 +264,35 @@ void chooseRandRoom(){
     }
     while(res == now);
 
+    bool isU = false;
+    bool isD = false;
+    bool isL = false;
+    bool isR = false;
+
+    if(pY == 1) isU = true;
+    if(pY == 18) isD = true;
+    if(pX == 1) isL = true;
+    if(pX == 28) isR = true;
+
+
     switch(res){
         case 1:
             nowR = room1;
 
-            if(pY > 10){
+
+            if(isL){
+                pX = spawn1r.x;
+                pY = spawn1r.y;
+            }
+            else if(isR){
+                pX = spawn1l.x;
+                pY = spawn1l.y;
+            }
+            else if(isU){
                 pX = spawn1d.x;
                 pY = spawn1d.y;
             }
-            else{
+            else if(isD){
                 pX = spawn1u.x;
                 pY = spawn1u.y;
             }
@@ -242,11 +304,19 @@ void chooseRandRoom(){
         case 2:
             nowR = room2;
 
-            if(pY > 10){
+            if(isL){
+                pX = spawn2r.x;
+                pY = spawn2r.y;
+            }
+            else if(isR){
+                pX = spawn2l.x;
+                pY = spawn2l.y;
+            }
+            else if(isU){
                 pX = spawn2d.x;
                 pY = spawn2d.y;
             }
-            else{
+            else if(isD){
                 pX = spawn2u.x;
                 pY = spawn2u.y;
             }
@@ -258,11 +328,19 @@ void chooseRandRoom(){
         case 3:
             nowR = room3;
 
-            if(pY > 10){
+            if(isL){
+                pX = spawn3r.x;
+                pY = spawn3r.y;
+            }
+            else if(isR){
+                pX = spawn3l.x;
+                pY = spawn3l.y;
+            }
+            else if(isU){
                 pX = spawn3d.x;
                 pY = spawn3d.y;
             }
-            else{
+            else if(isD){
                 pX = spawn3u.x;
                 pY = spawn3u.y;
             }
@@ -274,11 +352,19 @@ void chooseRandRoom(){
         case 4:
             nowR = room4;
 
-            if(pY > 10){
+            if(isL){
+                pX = spawn4r.x;
+                pY = spawn4r.y;
+            }
+            else if(isR){
+                pX = spawn4l.x;
+                pY = spawn4l.y;
+            }
+            else if(isU){
                 pX = spawn4d.x;
                 pY = spawn4d.y;
             }
-            else{
+            else if(isD){
                 pX = spawn4u.x;
                 pY = spawn4u.y;
             }
@@ -297,6 +383,13 @@ bool checkPos(int x, int y, std::string *room, char caller = 'n'){
         if(caller == 'p' && room[y][x] == en){
             room[y][x] = '.';
             kills++;
+            StatsSave();
+            return true;
+        }
+
+        if(caller == 'p' && room[y][x] == '+'){
+            room[y][x] = '.';
+            lives = std::min(maxLives, lives+heal);
             return true;
         }
 
@@ -310,6 +403,9 @@ bool checkPos(int x, int y, std::string *room, char caller = 'n'){
             return false;
         }
 
+        if(caller == 'n' && room[y][x] == hh)
+            return false;
+
         return true;
     }
     else
@@ -317,7 +413,7 @@ bool checkPos(int x, int y, std::string *room, char caller = 'n'){
 }
 
 bool isNearPlayer(int x, int y, cord &poss){
-    cord pos[8] = {{x, y+1}, {x-1, y}, {x+1, y}, {x, y-1}};
+    cord pos[4] = {{x, y+1}, {x-1, y}, {x+1, y}, {x, y-1}};
 
     for(cord c : pos){
         if(c.x == pX && c.y == pY) {
@@ -332,7 +428,7 @@ void EnemyAI(std::string* room) {
     static int frameCounter = 0;
     frameCounter++;
 
-    if (frameCounter < 50) {
+    if (frameCounter < inits) {
         return;
     }
     frameCounter = 0;
@@ -390,16 +486,7 @@ void EnemyAI(std::string* room) {
     drawScreen(room);
 }
 
-void StatsSave(){
-    std::ofstream ostt("stats.txt");
-    
-    maxKills = std::max(maxKills, kills);
-    if(ostt.is_open()){
-        ostt << maxKills;
-        ostt.close();
-    }
 
-}
 
 void StatsOpen(){
     std::ifstream istt("stats.txt");
@@ -438,7 +525,7 @@ int main(){
 
     while(isRun){
 
-        if(!lives)return 0;
+        if(lives <= 0)return 0;
 
         
 
@@ -463,8 +550,6 @@ int main(){
         }
 
         EnemyAI(nowR);
-
-        StatsSave();
         Sleep(10);
 
     }

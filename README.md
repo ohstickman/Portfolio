@@ -119,7 +119,7 @@
   <details>
   <summary>Скриншоты</summary>
 
-  `-`
+  `https://github.com/ohstickman/Portfolio/releases/`
 
   </details>
 
@@ -140,7 +140,7 @@
   <details>
   <summary>Скриншоты</summary>
 
-  `https://github.com/ohstickman/Portfolio/releases/`
+  `mp4 в папке с игрой`
 
   </details>
 

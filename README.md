@@ -1,60 +1,60 @@
 ##### Мои проекты начиная с 23.10.2026 :)
 
-# С++
+# C++
 
 ## 1. Консольная версия Cyber Grind.
 
 ### Управление
-- Хождение на **В/А/С/Д**
+- Хождение на **W/A/S/D**
 - Чтоб убить врага нужно встать на его клетку
 - Чтоб подобрать аптечку нужно встать на нее
 
 ### Интерактив
 - **4** вариации комнат
-- Максимальное количество убийств сохраняется в `статистика.txt`
+- Максимальное количество убийств сохраняется в `stats.txt`
 - Бесконечно врагов
 
-**Инструменты:** `С++`
+**Инструменты:** `C++`
 
-  <подробности>
-  <резюме>Скриншоты</резюме>
+  <details>
+  <summary>Скриншоты</summary>
 
-  <имг ширина="424" высота="369" альт="изображение" источник="https://github.com/user-attachments/assets/c1bc4a5f-1fe9-41b1-b23d-4310cbc31f06" />
+  <img width="424" height="369" alt="image" src="https://github.com/user-attachments/assets/c1bc4a5f-1fe9-41b1-b23d-4310cbc31f06" />
 
-  <имг ширина="419" высота="371" альт="изображение" источник="https://github.com/user-attachments/assets/58d61d21-e2f7-470d-99d1-d578052cd501" />
+  <img width="419" height="371" alt="image" src="https://github.com/user-attachments/assets/58d61d21-e2f7-470d-99d1-d578052cd501" />
 
 
-  </подробности>
+  </details>
 
 ---
 
-## 2. 2д версии Cyber Grind.
+## 2. 2д версия Cyber Grind.
 
 ### Управление
-- Хождение **В/А/С/Д**
+- Хождение **W/A/S/D**
 - Для убийства врага надо нанести ему **75 хп**
-- Для атаки - **КОСМОС**
+- Для атаки - **SPACE**
 - Для подбора аптечки надо коснуться ее
 
 ### Интерактив
 - **2** вариации комнаты
-- Максимальное количество убийств сохраняется в `статистика.txt`
+- Максимальное количество убийств сохраняется в `stats.txt`
 - Анимации:
   - урона
   - атаки
   - исцеление
 - Бесконечно врагов
 
-**Инструменты:** `С++`, `райлиб`
+**Инструменты:** `C++`, `raylib`
 
-  <подробности>
-  <резюме>Скриншоты</резюме>
+  <details>
+  <summary>Скриншоты</summary>
 
-  <имг ширина="800" высота="724" альт="изображение" источник="https://github.com/user-attachments/assets/4596b498-f5cc-464c-914a-80ec5dcecef2" />
+  <img width="800" height="724" alt="image" src="https://github.com/user-attachments/assets/4596b498-f5cc-464c-914a-80ec5dcecef2" />
 
-  <имг ширина="793" высота="720" альт="изображение" источник="https://github.com/user-attachments/assets/7f988565-2b25-4255-b9e8-a0a7fe798e94" />
+  <img width="793" height="720" alt="image" src="https://github.com/user-attachments/assets/7f988565-2b25-4255-b9e8-a0a7fe798e94" />
 
-  </подробности>
+  </details>
 
 ---
 
@@ -81,23 +81,23 @@
 **Инструменты:** `C++`, `raylib`
 
   <details>
-  <резюме>Скриншоты</резюме>
+  <summary>Скриншоты</summary>
 
-  <имг ширина="996" высота="823" альт="изображение" источник="https://github.com/user-attachments/assets/29cd5de6-ea80-4c43-a20f-80e51794d52f" />
+  <img width="996" height="823" alt="image" src="https://github.com/user-attachments/assets/29cd5de6-ea80-4c43-a20f-80e51794d52f" />
 
-  <имг ширина="995" высота="822" альт="изображение" источник="https://github.com/user-attachments/assets/23951e63-4ff2-48b4-a446-b9361d399bbb" />
+  <img width="995" height="822" alt="image" src="https://github.com/user-attachments/assets/23951e63-4ff2-48b4-a446-b9361d399bbb" />
 
 
-  </подробности>
+  </details>
 
 ---
 
-# Единство
+# Unity
 
 ###### Unity 6.3 LTS (6000.3.8f1)
 ###### (apk билды - https://github.com/ohstickman/Portfolio/releases/)
 
-## 4. Теневой протокол
+## 4. Shadow Protocol
 
 ### Управление
 - Вести пальцем по экрану и **появится** джойстик управления
